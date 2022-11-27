@@ -22,7 +22,7 @@ namespace VenetStudio
         private static readonly CachedData<Vector3> CameraPos = new ();
         public static Vector3 GetCameraPos()
         {
-            if (!CameraPos.IsRelevant())
+            if (!CameraPos.IsFresh())
             {
                 CameraPos.value = GetMainCamTransform().position;
             }
@@ -38,25 +38,26 @@ namespace VenetStudio
             return hit.point;
         }
 
-        // TODO(yakvi): This currently only works for one and only mask per frame. Expand MouseHit? 
-        private static readonly CachedData<RaycastHit> MouseHit = new ();
+        private static readonly CachedData<int, RaycastHit> MouseHit = new ();
         public static bool GetMousePhysicsHit(out RaycastHit hit, int layerMask = ~0)
         {
-            if (!MouseHit.IsRelevant())
+            if (!MouseHit.IsFresh(layerMask))
             {
                 var ray = GetMainCam().ScreenPointToRay(InputCenter.mousePos);
-                Raycast(ray, out MouseHit.value, float.MaxValue, layerMask);
+                if (Raycast(ray, out hit, float.MaxValue, layerMask)) MouseHit.SetValue(layerMask, hit);
             }
-
-            hit = MouseHit.value;
-            return MouseHit.value.transform != null && !IsMouseOverUi();
+            else
+            {
+                hit = MouseHit.GetValue(layerMask);
+            }
+            return hit.transform != null && !IsMouseOverUi();
         }
 
         private static readonly CachedData<Vector3> MousePlanePos = new ();
         private static Plane mousePlane = new (Vector3.up, Vector3.zero);
         public static Vector3 GetMousePlanePos()
         {
-            if (!MousePlanePos.IsRelevant())
+            if (!MousePlanePos.IsFresh())
             {
                 var ray = GetMainCam().ScreenPointToRay(InputCenter.mousePos);
                 if (mousePlane.Raycast(ray, out var collisionDistance))
@@ -78,7 +79,7 @@ namespace VenetStudio
         private static readonly CachedData<float> DeltaTime = new ();
         public static float GetDeltaTime()
         {
-            if (!DeltaTime.IsRelevant()) DeltaTime.value = Time.deltaTime;
+            if (!DeltaTime.IsFresh()) DeltaTime.value = Time.deltaTime;
             return DeltaTime.value;
         }
     }
