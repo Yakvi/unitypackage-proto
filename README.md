@@ -15,6 +15,13 @@ your git repository is inside your Unity project:
 
 ## Scripts
 
+### Mouse Pointer
+
+Simple mouse pointer. Has two modes:
+
+* World plane (with Y position of 0)
+* Physics collision (collides with everything)
+
 ### Camera Controller
 
 Adds WASD controls to the camera, as well as Q/E for rotation and wheel for zoom.
