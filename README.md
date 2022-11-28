@@ -4,7 +4,16 @@ Collection of quick scripts, shaders, and materials for prototyping.
 
 # Installation
 
-If you're working with a git project, you can clone this project as a submodule. The snippet below presumes that your
+## Unity Package Manager
+
+You can install this package from the Package Manager directly:
+1. Open the Unity Package Manager Window (`Window` -> `Package Manager`)
+2. Click on `+` -> `Add package from git URL`
+3. Paste the HTTPS git url of the package: `https://github.com/Yakvi/unitypackage-proto.git` and select `Add`
+
+## Manual installation
+
+If you would like to modify the package to your needs, you can clone this project as a submodule. The snippet below presumes that your
 your git repository is inside your Unity project:
 
 ```
