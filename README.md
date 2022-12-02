@@ -84,6 +84,7 @@ add `using static VenetStudio.Utility`.
       to `Physics.OverlapSphere`.
 * Random number generation (`RandomUtils.cs`)
     * `float GetRandom(float min, float max)`: Currently, identical to `Random.Range`;
+    * `int GetRandom(int min, int max)`: Currently, identical to `Random.Range`;
 
 ## Shaders
 
