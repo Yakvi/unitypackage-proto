@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 - Add int version of `GetRandom`
+- Introduce Math utility functions: 
+  - Get Opposite Point
 
 ## [1.1.0] - 2022-11-27
 - Add 3D Mouse Pointer
